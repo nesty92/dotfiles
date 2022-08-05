@@ -65,6 +65,5 @@
 	oprl            = !echo https://eu-west-2.console.aws.amazon.com/codesuite/codecommit/repositories/Lanetalk-API/pull-requests/new/development/.../refs/heads/$(git current)?region=eu-west-2
 	undo            = !git reset --hard
 	lastnow		= !GIT_COMMITTER_DATE="`date`" git commit --amend --no-edit --date "`date`"
-	changelog = log --color --oneline --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	mychangelog     = log --oneline --decorate --author="Ernesto" --pretty=format:'-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	chagelog = [200~1st one
+	changelog	= log --color --oneline --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	mychangelog	= log --oneline --decorate --author="Ernesto" --pretty=format:'-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
