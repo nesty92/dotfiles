@@ -1,0 +1,70 @@
+[user]
+	name = Ernesto Alejandro Santana Hidalgo
+	email = ernesto.alejandrosantana@gmail.com
+	signingkey = 98A27547EB4A32AD
+[commit]
+	gpgsign = true
+[url "ssh://git@gitlab.com/"]
+	insteadOf = https://gitlab.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.dev/
+[fetch]
+	prune = true
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[rebase]
+	autostash = true
+[credential]
+	helper = store
+[alias]
+	st              = status -sb
+	ci              = commit
+	co              = checkout
+	br              = branch
+	down            = clone --depth=1
+	delouse         = "!f() { curr_sha=`git sha`; git reset HEAD~1;git commit --allow-empty --no-verify -C \"$curr_sha\"; }; f"
+	hide		= update-index --assume-unchanged
+	unhide		= update-index --no-assume-unchanged
+	cp              = cherry-pick
+	cps             = cherry-pick -s
+	today           = diff @{yesterday}.. --stat
+	meh             = commit --amend
+	wdiff           = diff --word-diff=color
+	wshow           = show --word-diff=color
+	lasttag         = describe --tags --abbrev=0
+	branches        = branch -vv
+	comerge         = "!x() { target=`git symbolic-ref HEAD`; git co $1; git merge $target; }; x"
+	ours            = "!f() { git checkout --ours -- $@ && git add -- $@; }; f"
+	theirs          = "!f() { git checkout --theirs -- $@ && git add -- $@; }; f"
+	ignore          = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	yolo            = !GPG_TTY=$(tty) git commit -m \"$(curl --silent --fail https://raw.githubusercontent.com/ngerakines/commitment/master/commit_messages.txt| shuf -n 1 -)\"
+	cached          = diff --cached
+	uncommit        = reset --soft HEAD~1
+	show-patch      = format-patch -1 --stdout
+	sha             = rev-parse HEAD
+	origin          = config --get remote.origin.url
+	current         = rev-parse --abbrev-ref HEAD
+	out             = !git log origin/$(git current)..
+	incoming        = !git log ..origin/$(git current)
+	publish         = !git push origin $(git current)
+	id              = !echo "git clone --recursive $(git origin) --branch $(git current)"
+	recent          = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 100
+	fixup           = !git commit --amend --no-edit --no-verify --allow-empty\n
+	fixit           = "!f() { git commit --fixup=$1; GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $1~1; }; f"
+	wip             = !git commit -m 'WIP'
+	root            = !pwd
+	upstream        = !git branch --set-upstream-to=origin/$(git current) $(git current)
+	repo            = !git remote -v | grep '@.*fetch' | sed 's/.*:\\(.*\\).git.*/\\1/g'
+	opr             = !open https://github.com/$(git repo)/compare/$(git current)?expand=1
+	oprl            = !echo https://eu-west-2.console.aws.amazon.com/codesuite/codecommit/repositories/Lanetalk-API/pull-requests/new/development/.../refs/heads/$(git current)?region=eu-west-2
+	undo            = !git reset --hard
+	lastnow		= !GIT_COMMITTER_DATE="`date`" git commit --amend --no-edit --date "`date`"
+	changelog = log --color --oneline --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	mychangelog     = log --oneline --decorate --author="Ernesto" --pretty=format:'-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	chagelog = [200~1st one
